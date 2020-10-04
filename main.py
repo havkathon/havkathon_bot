@@ -5,6 +5,7 @@ import ast
 from discord.ext import commands
 import random
 client = commands.Bot(command_prefix = '-')
+# DO NOT TOUCH ANYTHING ABOVE THIS
 
 with open('leaderboard.txt', 'r') as lead:
     leader = ast.literal_eval(lead.readline())
@@ -37,7 +38,17 @@ fact7 = discord.Embed(
 )
 fact8 = discord.Embed(
     title = 'Global temperature has increased by 2°C since 1880, which causes a much larger impact than you would expect.',
-    description = 'Source: <https://climate.nasa.gov/>'
+    description = 'The image shows the overall teperature change in recent years.\n\nSources: <https://climate.nasa.gov/>\n<http://imbie.org/data-downloads/>'
+)
+fact8.set_image(url = 'https://havkathon.000webhostapp.com/Global_Temperature_Trend.png')
+fact9 = discord.Embed(
+    title = 'Rising sea levels are caused by melting glaciers and ice sheets on land and thermal expansion - the expansion of water as it warms. Both of these phenomena are closely related to global warming.',
+    description = 'The image shows the cumulative ice melt from Antartica, showing its overall impact on climate change.\n\nSources: <https://www.jpl.nasa.gov/edu/teach/activity/graphing-sea-level-trends/>\n<http://imbie.org/data-downloads/>'
+)
+fact9.set_image(url = 'https://havkathon.000webhostapp.com/Antartica_Cumalative_Sea_Level_Contribution.png')
+fact10 = discord.Embed(
+    title = 'Climate change has caused a significant impact on natural disasters - weather is becoming more and more extreme, with a record-breaking number of hottest days in recent years and intensifying hurricanes and even snowstorms.',
+    description = 'Source: <https://www.jpl.nasa.gov/edu/news/2019/10/18/nasas-eyes-on-extreme-weather/>'
 )
 act1 = discord.Embed(
     title = 'Ride a bike or walk to work/school if it is close enough. If not, opt to take public transport to reduce emission of greenhouse gases.'
@@ -60,6 +71,10 @@ act5 = discord.Embed(
 act6 = discord.Embed(
     title = 'Spread awareness for climate change. Just casually mentioning the importance of conserving electricity to your friends can make a difference.',
     description = 'Source: <https://davidsuzuki.org/what-you-can-do/top-10-ways-can-stop-climate-change/>'
+)
+act7 = discord.Embed(
+    title = 'Using more energy-efficient electrical appliances (or using fewer in the first place) and choosing public transport over private transport (or simply using less fuel-reliant methods of transport, such as riding a bicycle) help mitigate climate change.',
+    description = 'Source: <https://earthobservatory.nasa.gov/blogs/climateqa/what-can-we-do-about-global-warming-2/>'
 )
 question1 = discord.Embed(
     title = 'Which of the following about LED light bulbs is not true?',
@@ -84,6 +99,14 @@ question6 = discord.Embed(
     title = 'Which of these human activities do not release greenhouse gases into the atmosphere?',
     description = '1. Eating rice\n2. Concrete production\n3. Eating seafood\n4. None of the above\n\nType the option number to answer!\n\nSource: <https://edition.cnn.com/2019/06/03/world/gallery/surprising-sources-greenhouse-gas-emissions-intl/index.html>'
 )
+question7 = discord.Embed(
+    title = 'How much has the global sea level risen since 1993? (As of March 2020)',
+    description = '1. around 30mm\n2. around 50mm\n3. around 70mm\n4. around 90mm\n\nType the option number to answer!\n\nSource: <https://www.jpl.nasa.gov/edu/teach/activity/graphing-sea-level-trends/>'
+)
+question8 = discord.Embed(
+    title = 'Which of the following does not contribute to rising sea levels?',
+    description = '1. Melting sea ice\n2. Increased amount of hurricanes\n3. Thermal expansion\n4. Melting glaciers on land\n\nType the option number to answer!\n\nSource: <https://www.jpl.nasa.gov/edu/teach/activity/graphing-sea-level-trends/>'
+)
 helpmsg = discord.Embed(
     title = 'About Me:',
     description = 'Hello! I am Havkathon-Bot and I am here to spread facts and awareness regarding climate change.\n\nMy prefix is `-`.\n\n__Commands:__\n`-fact`: I will give you a random fact about climate change!\n`-act`: Want to combat climate change? I can suggest a simple action that will make a difference.\n`-trivia`: Answer a random trivia question to learn more about climate change or actions to counter it.\n`-leaderboard`: Shows leaderboard for the trivia.\n`-website`: Gives link to our website, which contains information related to climate change and relevant issues.\n`-invite`: Provides link for inviting me to your server!\n`-helpMessage`: Generates this help list!\n\nThank you for using this bot, let\'s fight climate change together!'
@@ -94,14 +117,14 @@ havkathonLink = discord.Embed(
 )
 inviteLink = discord.Embed(
     title = 'Invite link for Havkathon-Bot:',
-    description = '<https://discord.com/api/oauth2/authorize?client_id=761633293270908968&permissions=19456&scope=bot>'
+    description = '<https://discord.com/api/oauth2/authorize?client_id=761984202686070795&permissions=19456&scope=bot>'
 )
 
-facts = [fact1, fact2, fact3, fact4, fact5, fact6, fact7, fact8]
-acts = [act1, act2, act3, act4, act5, act6]
+facts = [fact1, fact2, fact3, fact4, fact5, fact6, fact7, fact8, fact9, fact10]
+acts = [act1, act2, act3, act4, act5, act6, act7]
 
-questions = {0: '3', 1: '1', 2: '4', 3: '1', 4: '3', 5: '4'}
-questionArr = [question1, question2, question3, question4, question5, question6]
+questions = {0: '3', 1: '1', 2: '4', 3: '1', 4: '3', 5: '4', 6: '4', 7: '2'}
+questionArr = [question1, question2, question3, question4, question5, question6, question7, question8]
 
 @client.event
 async def on_ready():
@@ -207,6 +230,7 @@ async def trivia(ctx):
                     lead.write(str(leader))
     except asyncio.TimeoutError:
         await ctx.channel.send('Sorry, you took too long!')
-
+        
+# DO NOT TOUCH ANYTHING BELOW THIS
 keepalive.keepalive()
 client.run('[REDACTED]')
