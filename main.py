@@ -4,7 +4,7 @@ import asyncio
 import ast
 from discord.ext import commands
 import random
-client = commands.Bot(command_prefix = '$')
+client = commands.Bot(command_prefix = '-')
 # DO NOT TOUCH ANYTHING ABOVE THIS
 
 with open('leaderboard.txt', 'r') as lead:
