@@ -113,12 +113,14 @@ helpmsg = discord.Embed(
 )
 havkathonLink = discord.Embed(
     title = 'Link to our webpage:',
-    description = '<https://havkathongreenheroes.weebly.com/>'
+    description = 'https://havkathongreenheroes.weebly.com/'
 )
+havkathonLink.set_image(url = 'https://havkathon.000webhostapp.com/havkathongreenheroes.jpg')
 inviteLink = discord.Embed(
-    title = 'Invite link for Havkathon-Bot:',
-    description = '<https://discord.com/api/oauth2/authorize?client_id=761984202686070795&permissions=19456&scope=bot>'
+    title = 'Invite Havkathon-Bot to your server:',
+    description = '<https://discord.com/api/oauth2/authorize?client_id=761984202686070795&permissions=19456&scope=bot>\n\n__The Havkathon-Bot Server:__\n<https://discord.gg/rPFJ9cr>'
 )
+inviteLink.set_image(url = 'https://havkathon.000webhostapp.com/havkathongreenheroes.jpg')
 
 facts = [fact1, fact2, fact3, fact4, fact5, fact6, fact7, fact8, fact9, fact10]
 acts = [act1, act2, act3, act4, act5, act6, act7]
