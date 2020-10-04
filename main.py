@@ -4,7 +4,7 @@ import asyncio
 import ast
 from discord.ext import commands
 import random
-client = commands.Bot(command_prefix = '-')
+client = commands.Bot(command_prefix = '$')
 # DO NOT TOUCH ANYTHING ABOVE THIS
 
 with open('leaderboard.txt', 'r') as lead:
@@ -22,7 +22,7 @@ fact3 = discord.Embed(
     title = 'Climate change directly affects the livelihood of human beings.'
 )
 fact4 = discord.Embed(
-    title = 'Short term temperature fluctuations caused by climate change can impact on human health.',
+    title = 'Short term temperature fluctuations caused by climate change can impact human health.',
     description = 'Source: <https://www.who.int/features/factfiles/climate_change/facts/en/index2.html>'
 )
 fact5 = discord.Embed(
@@ -109,11 +109,11 @@ question8 = discord.Embed(
 )
 helpmsg = discord.Embed(
     title = 'About Me:',
-    description = 'Hello! I am Havkathon-Bot and I am here to spread facts and awareness regarding climate change.\n\nMy prefix is `-`.\n\n__Commands:__\n`-fact`: I will give you a random fact about climate change!\n`-act`: Want to combat climate change? I can suggest a simple action that will make a difference.\n`-trivia`: Answer a random trivia question to learn more about climate change or actions to counter it.\n`-leaderboard`: Shows leaderboard for the trivia.\n`-website`: Gives link to our website, which contains information related to climate change and relevant issues.\n`-invite`: Provides link for inviting me to your server!\n`-helpMessage`: Generates this help list!\n\nThank you for using this bot, let\'s fight climate change together!'
+    description = 'Hello! I am Havkathon-Bot and I am here to spread facts and awareness regarding climate change.\n\nMy prefix is `-`.\n\n__Commands:__\n`-fact`: I will give you a random fact about climate change!\n`-act`: Want to combat climate change? I can suggest a simple action that will make a difference.\n`-trivia`: Answer a random trivia question to learn more about climate change or actions to counter it.\n`-leaderboard`: Shows leaderboard for the trivia.\n`-remove`: Removes yourself from the leaderboard. This resets your score.\n`-website`: Gives link to our website and machine learning data, which contains information regarding climate change and relevant issues.\n`-invite`: Provides link for inviting me to your server!\n`-helpMessage`: Generates this help list!\n\nThank you for using this bot, let\'s fight climate change together!'
 )
 havkathonLink = discord.Embed(
-    title = 'Link to our webpage:',
-    description = 'https://havkathongreenheroes.weebly.com/'
+    title = 'Link to our webpage and Machine Learning data:',
+    description = 'https://1earth1lifetime.weebly.com/\nhttps://rpubs.com/havkathon/670274'
 )
 havkathonLink.set_image(url = 'https://havkathon.000webhostapp.com/havkathongreenheroes.jpg')
 inviteLink = discord.Embed(
@@ -232,6 +232,32 @@ async def trivia(ctx):
                     lead.write(str(leader))
     except asyncio.TimeoutError:
         await ctx.channel.send('Sorry, you took too long!')
+
+@client.command()
+async def remove(ctx):
+    global leader
+    def check(m):
+        return m.author == ctx.author and m.channel == ctx.channel
+    with open('leaderboard.txt', 'r') as lead:
+        leader = ast.literal_eval(lead.readline())
+    if (ctx.author.name not in leader):
+        await ctx.channel.send('You are not on the leaderboard.')
+    elif (ctx.author.name in leader):
+        x = leader[ctx.author.name]
+        await ctx.channel.send('Are you sure you want to remove yourself from the leaderboard? Your score of ' + str(x) + ' will be removed. Type `Yes` to agree or `No` to disagree.')
+        y = await client.wait_for('message', timeout = 60.0, check = check)
+        if (y.content.lower() == 'yes'):
+            try:
+                with open('leaderboard.txt', 'r') as lead:
+                    leader = ast.literal_eval(lead.readline())
+                leader.pop(ctx.author.name)
+                await ctx.channel.send('Leaderboard status removed.')
+                with open('leaderboard.txt', 'w') as lead:
+                    lead.write(str(leader))
+            except asyncio.TimeoutError:
+                    await ctx.channel.send('You are still on the leaderboard - sorry, you took too long.')
+        elif (y.content.lower() == 'no'):
+            await ctx.channel.send('You are still on the leaderboard.') 
         
 # DO NOT TOUCH ANYTHING BELOW THIS
 keepalive.keepalive()
